@@ -1,0 +1,56 @@
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+BasedOnStyle: WebKit
+IndentWidth: 2
+---
+Language: Cpp
+ColumnLimit: 100
+# Force pointers to the type for C++.
+DerivePointerAlignment: false
+PointerAlignment: Right
+AccessModifierOffset: -2
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: true
+AllowAllArgumentsOnNextLine: true
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowAllConstructorInitializersOnNextLine: false
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+IndentCaseLabels: true
+NamespaceIndentation: All
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterEnum: false
+  AfterStruct: false
+  SplitEmptyFunction: false
+  AfterClass: false
+  AfterControlStatement: Never
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  #BeforeLambdaBody: false
+  #BeforeWhile: false
+  SplitEmptyRecord: true
+BreakConstructorInitializers: AfterColon
+---
+Language: JavaScript
+DisableFormat: true
+# Use 150 columns for JS.
+ColumnLimit: 150
+---
+Language: Proto
+# Don't format .proto files.
+DisableFormat: true
+---
+Language: CSharp
+# Use 100 columns for C#.
+ColumnLimit: 100
+

@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/common">
+    <file>utils.mjs</file>
+    <file>AdbUtils.mjs</file>
+    <file>PathUtils.mjs</file>
+    <file>FastbootUtils.mjs</file>
+    <file>queue.mjs</file>
+    <file>vars.mjs</file>
+    <file>eventemitter.mjs</file>
+  </qresource>
+</RCC>

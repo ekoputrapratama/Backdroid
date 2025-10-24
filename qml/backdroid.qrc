@@ -1,0 +1,12 @@
+<RCC>
+  <qresource prefix="/">
+    <file>MainWindow.qml</file>
+    <file>backdroid.mjs</file>
+    <file>Card.qml</file>
+    <file>WindowStateSaver.qml</file>
+    <file>SimpleComboBox.qml</file>
+    <file>FilePicker.qml</file>
+    <file>qtquickcontrols2.conf</file>
+    <file>icon.svg</file>
+  </qresource>
+</RCC>

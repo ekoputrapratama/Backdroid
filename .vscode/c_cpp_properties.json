@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": [
+        "/usr/local/include",
+        "/usr/include",
+        "/usr/include/qt",
+        "/usr/include/qt/QtCore",
+        "/usr/include/qt/QtQuick",
+        "/usr/include/qt/QtNetwork",
+        "/usr/include/qt/QtDBus",
+        "/usr/include/python3.13",
+        "${workspaceFolder}/lib/bnr-common/include",
+        "${workspaceFolder}/include"
+      ],
+      "defines": [],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c11",
+      "cppStandard": "c++14",
+      "intelliSenseMode": "clang-x64",
+      "configurationProvider": "ms-vscode.cmake-tools"
+    }
+  ],
+  "version": 4
+}
