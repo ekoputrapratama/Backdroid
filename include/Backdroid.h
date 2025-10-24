@@ -44,6 +44,12 @@ private:
   DeviceWatcher *_watcher;
   AndroidDeviceList devices;
   Settings *settings;
+
+#ifdef BACKDROID_DEBUG
+  QProcess *daemonProcess;
+  void runDaemon();
+#endif
+  void initPyFunctions();
 public Q_SLOTS:
   void mkdir(const QString &path, QJSValue cb = QJSValue::UndefinedValue);
   void rmdir(const QString &path, QJSValue cb = QJSValue::UndefinedValue);
@@ -59,5 +65,7 @@ public Q_SLOTS:
 
   QList<QVariant> getDevices();
 };
+
+void *PyInit_backdroid(void *);
 
 #endif

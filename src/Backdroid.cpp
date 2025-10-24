@@ -1,9 +1,14 @@
 #include "Backdroid.h"
+#undef slots
+#include <Python.h>
+#define slots Q_SLOTS
+#include <iostream>
 
 static BackDroid *instance;
 /**
  * BackDroid
  */
+
 
 BackDroid::BackDroid(QQmlApplicationEngine *e) : engine(e) {
   Q_INIT_RESOURCE(common);
@@ -13,10 +18,21 @@ BackDroid::BackDroid(QQmlApplicationEngine *e) : engine(e) {
   QString path = QCoreApplication::applicationDirPath();
   appDir = path;
 
+#if defined(BACKDROID_DEBUG)
+  QString backdroidModuleDir = QDir(appDir).absolutePath().replace("build", "daemon");
+
+  PyRun_SimpleString("import sys");
+  PyRun_SimpleString(QString("sys.path.append(\"%1\")").arg(backdroidModuleDir).toStdString().c_str());
+#endif
+
   settings = new Settings("Mixaline");
   settings->set("applicationDir", appDir);
   settings->save();
-  
+
+#if defined(BACKDROID_DEBUG)
+  runDaemon();
+#endif
+
   m_backupDir = QDir(appDir).filePath("backups");
 
   _watcher = new DeviceWatcher();
@@ -38,6 +54,28 @@ BackDroid::~BackDroid() {
     delete _watcher;
   }
 }
+
+#ifdef BACKDROID_DEBUG
+void BackDroid::runDaemon() {
+  QString backdroidModuleDir = QDir(appDir).absolutePath().replace("build", "daemon");
+
+  daemonProcess = new QProcess();
+  QProcess::connect(daemonProcess, &QProcess::errorOccurred, daemonProcess,
+                    [this](QProcess::ProcessError e) {
+                      qCritical() << e;
+                    });
+
+  QString program
+      = QDir(appDir).absolutePath().replace("build", "daemon/").append("backdroidd.py");
+
+  daemonProcess->setProcessChannelMode(QProcess::ForwardedChannels);
+  QStringList env = QProcessEnvironment::systemEnvironment().toStringList();
+  env.append("PYTHONPATH=" + backdroidModuleDir);
+  daemonProcess->setEnvironment(env);
+  daemonProcess->start(program, QStringList());
+  daemonProcess->waitForFinished(200);
+}
+#endif
 
 QList<QVariant> BackDroid::getDevices() {
 
