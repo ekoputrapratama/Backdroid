@@ -1,6 +1,6 @@
 # Backdroid 🛡️📱
 
-**Backdroid** is a C++ application for backing up and restoring Android devices using ADB.  
+**Backdroid** is a Qt6 Quick application for backing up and restoring Android devices using ADB.  
 It provides a clean, native interface for managing device data, with a Python daemon handling background tasks and system-level operations.
 
 ---
