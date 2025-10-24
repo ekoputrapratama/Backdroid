@@ -2,7 +2,6 @@
 #undef slots
 #include <Python.h>
 #define slots Q_SLOTS
-#include <iostream>
 
 static BackDroid *instance;
 /**
