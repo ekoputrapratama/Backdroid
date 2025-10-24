@@ -34,5 +34,4 @@ ninja
 ## NOTE
 - Some backup features like contacts, messages, wifi, data and system data need root access, right now i'm working on some of this problems, read more on the last part of this note
 - this thing still cant watch usb devices and save settings because some integration from the old system that needs to run 2 daemon, either combine it into one daemon or make both separate executable so it can be called from the main app. this app use some of the code from [qdevicewatcher](https://github.com/wang-bin/qdevicewatcher) to watch usb devices. only work for linux right now.
-- for right now this app doesnt support user adb in path to prevent command difference and breaking changes, but i will update it when i have the time.
 - there is some method i have tried to be able to backup contacts, messages and wifi without root, but this will need the android to install the android application and communicate with tcp server to send those data, while the script itself is written in python, so right now i tried to convert it to C++ so it can be included in this app.
