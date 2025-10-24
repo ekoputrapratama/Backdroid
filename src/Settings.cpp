@@ -242,7 +242,7 @@ QVariant Settings::parseValue(void *value) {
     // need to becareful when playing with dictionary
     // don't randomly decrese the reference
     // cuz dictionary not copying those data but referencing it
-    // it will surely be segmentation vault if it's freed randomly
+    // it will surely be segmentation fault if it's freed randomly
     QVariantMap map = QVariantMap();
     PyObject *keys = PyDict_Keys((PyObject *)value);
     PyObject *next;
