@@ -103,6 +103,7 @@ void Settings::set(const char *key, const QString &value) {
   // document.object().
   set(key, value.toStdString().c_str());
 }
+
 void Settings::set(const QString &key, const QString &value) {
   set(key.toStdString().c_str(), value.toStdString().c_str());
 }
@@ -135,23 +136,20 @@ void Settings::set(const char *key, const int &value) {
     PyErr_Print();
   }
 }
+
 void Settings::set(const char *key, const QObject *value) {
-  PyObject *pDict, *pVal, *pArgs;
+  PyObject *pDict, *pVal;
   QList<QByteArray> names = QList(value->dynamicPropertyNames());
 
   pDict = PyDict_New();
-  pArgs = PyTuple_New(2);
-  QStringList formatList = {};
   QList<PyObject *> pyValues = {};
   foreach (QByteArray c, names) {
     QVariant property = value->property(c.data());
 
     if (property.typeId() == QMetaType::Type::QString) {
-      // formatList.append("s:s");
       pVal = PyUnicode_FromString(property.toString().toStdString().c_str());
       PyDict_SetItemString(pDict, c.data(), pVal);
     } else if (property.typeId() == QMetaType::Type::Int) {
-      // formatList.append("s:l");
       pVal = PyLong_FromLong(property.toInt());
       PyDict_SetItemString(pDict, c.constData(), pVal);
     }
@@ -171,15 +169,12 @@ void Settings::set(const char *key, const QObject *value) {
   Py_DECREF(pName);
   Py_DECREF(pKey);
   Py_DECREF(pDict);
-  Py_DECREF(pArgs);
 }
 
 void Settings::set(const QString &key, const QObject *value) {
-  // document.object().
   set(key.toStdString().c_str(), value);
 }
 void Settings::set(const QString &key, const QObject &value) {
-  // document.object().
   set(key.toStdString().c_str(), &value);
 }
 
@@ -198,11 +193,10 @@ void Settings::set(const char *key, const char *value) {
 }
 
 void Settings::set(const char *key, const QList<char *> &value) {
-  PyObject *pList, *pVal, *pArgs;
+  PyObject *pList, *pVal;
   qDebug() << "set setting value" << key << value;
   qDebug() << "list size" << value.size();
 
-  pArgs = PyTuple_New(1);
   pList = PyList_New(0);
   foreach (char *str, value) {
     pVal = PyUnicode_FromString(str);
@@ -221,7 +215,6 @@ void Settings::set(const char *key, const QList<char *> &value) {
   Py_DECREF(pName);
   Py_DECREF(pKey);
   Py_DECREF(pList);
-  Py_DECREF(pArgs);
 }
 
 void Settings::set(const char *key, const QList<QString> &value) {
