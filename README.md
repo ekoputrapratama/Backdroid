@@ -23,7 +23,7 @@ It provides a clean, native interface for managing device data, with a Python da
 
 ### 🔹 Build Instructions
 ```bash
-git clone https://github.com/yourusername/backdroid.git
+git clone https://github.com/ekoputrapratama/backdroid.git
 cd backdroid
 mkdir build
 cmake -B build -G Ninja
