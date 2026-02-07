@@ -23,19 +23,11 @@ Settings::Settings(QString org, QString name) {
                            .append(QDir::separator())
                            .append(org)
                            .append(QDir::separator())
-                           .append(name + ".json");
+                           .append(name + ".yaml");
 
   QFileInfo info(configPath);
   if (!info.exists()) {
     QDir().mkpath(info.absoluteDir().absolutePath());
-  } else {
-    QFile file(info.absoluteFilePath());
-    if (!file.open(QIODevice::ReadOnly)) {
-      qWarning() << "cannot load configuration from" << configPath;
-      return;
-    }
-
-    QByteArray data = file.readAll();
   }
   initModule(org, name);
 }
@@ -221,8 +213,7 @@ void Settings::set(const char *key, const QList<QString> &value) {
 }
 
 QVariant Settings::parseValue(void *value) {
-  // PyObject *pVal;
-
+  
   if (PyUnicode_Check(value)) {
     const char *str = PyUnicode_AsUTF8((PyObject *)value);
     qDebug() << "returned value is string" << str;
