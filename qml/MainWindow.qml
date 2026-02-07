@@ -14,17 +14,14 @@ import "/common/queue.mjs" as Queue
 
 // import "backdroid.mjs" as BackDroid
 
-// calculate percentage to show a progressbar
 ApplicationWindow {
   id: mainWindow
   visible: true
-  title: qsTr("Backup & Restore")
+  title: qsTr("BackDroid")
   minimumWidth: 850
   minimumHeight: 600
   width: 850
   height: 600
-  // x: Screen.width / 2 - width / 2
-  // y: Screen.height / 2 - height / 2
 
   property int apkCount: 0
   property int currentProgress: 0
@@ -36,7 +33,7 @@ ApplicationWindow {
 
   WindowStateSaver {
     window: mainWindow
-    windowName: "BackupAndRestore"
+    windowName: "BackDroid"
     defaultX: Screen.width / 2 - width / 2
     defaultY: Screen.height / 2 - height / 2
   }
@@ -49,15 +46,14 @@ ApplicationWindow {
     id: devicesDialog
     visible: false
     title: "Select Device"
-
+    anchors.centerIn: parent
     contentItem: Rectangle {
-      color: "lightskyblue"
+      color: "transparent"
       implicitWidth: 400
       implicitHeight: 100
-      Text {
-        text: "Hello blue sky!"
-        color: "navy"
+      SimpleComboBox {
         anchors.centerIn: parent
+        label: "Device"
       }
     }
   }
@@ -990,7 +986,7 @@ ApplicationWindow {
     }
   }
 
-  RoundButton {
+  Button {
     id: restoreBtn
     text: qsTr("Start Restore")
     anchors.left: parent.left
@@ -999,24 +995,45 @@ ApplicationWindow {
     anchors.bottomMargin: 10
     enabled: false
     visible: false
+    background: Rectangle {
+      color: "#0078d4"
+      opacity: enabled ? 1 : 0.3
+      anchors.fill: parent
+      radius: 10
+    }
     onClicked: {
       startRestore();
     }
   }
 
-  RoundButton {
+  Button {
     id: backupBtn
     text: qsTr("Start Backup")
     enabled: false
+    anchors.topMargin: 20
     anchors.left: parent.left
     anchors.leftMargin: 10
     anchors.bottom: parent.bottom
     anchors.bottomMargin: 10
+    contentItem: Text {
+      text: backupBtn.text
+      opacity: backupBtn.enabled ? 1.0 : 0.3
+      color: '#ffffff'
+      horizontalAlignment: Text.AlignHCenter
+      verticalAlignment: Text.AlignVCenter
+      elide: Text.ElideRight
+    }
+    background: Rectangle {
+      color: "#0078d4"
+      opacity: enabled ? 1 : 0.3
+      anchors.fill: parent
+      radius: 10
+    }
     onClicked: {
       backupIsRunning = true;
       updateButtonState();
       let device = Vars.currentDevice;
-      // devicesDialog.open();
+      devicesDialog.open();
 
       if (!device.isRooted && !device.isRootUser && dataChk.checked && length(Vars.devices) > 1) {
         dialog.icon = StandardIcon.Warning;
