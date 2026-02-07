@@ -15,7 +15,7 @@ set_property(GLOBAL PROPERTY TARGET_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 include(FeatureSummary)
 
-find_package(Python 3.13 REQUIRED)
+find_package(Python 3.14 REQUIRED)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-DBACKDROID_DEBUG) 
@@ -82,7 +82,7 @@ add_executable(backdroid ${backdroid_SRCS} ${backdroid_HDRS} ${backdroid_RESOURC
 target_include_directories(backdroid 
   PUBLIC ${CMAKE_CURRENT_LIST_DIR}/include
   ${CMAKE_HOME_DIRECTORY}/lib/backdroid-common/include
-  /usr/include/python3.13
+  /usr/include/python3.14
   # ${PYTHON_INCLUDE_DIRS}
   # ${Boost_INCLUDE_DIRS}
 )
@@ -100,7 +100,7 @@ target_link_libraries(backdroid PUBLIC
   Qt6::QuickControls2
   Qt6::QuickTemplates2
   Qt6::Xml
-  python3.13
+  python3.14
 )
 
 # set(bnrd_SRCS
