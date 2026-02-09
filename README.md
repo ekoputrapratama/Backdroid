@@ -19,7 +19,7 @@ It provides a clean, native interface for managing device data, with a Python da
 
 ### 🔹 Requirements
 - Qt 6.x (tested with Qt 6.10)
-- Python 3.13+ (for daemon and Settings)
+- Python 3.14+ (for daemon and Settings)
 
 ### 🔹 Build Instructions
 ```bash
